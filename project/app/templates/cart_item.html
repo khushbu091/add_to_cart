@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> hello cart page</h1>
+    <div>
+        {% for i in data %}
+        <div>
+            <img style="width: 100px; height: 100px;" src="{{media_url}}{{i.img}}" alt=""><br>
+        </div>
+        <div>
+            {{i.name}}
+        </div>
+        <div>
+            {{i.dec}}
+        </div>
+        <div>
+            {{i.price}}
+        </div>
+        <input style="width: 100px;" type="number" name="quantity" placeholder="quantity">
+
+        {%endfor%}
+        <p> Total Price:Rs {{total_price}}</p>
+    </div>
+
+    
+</body>
+</html>
