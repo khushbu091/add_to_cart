@@ -6,3 +6,4 @@ class User(models.Model):
     Descri=models.CharField(max_length=500)
     Image=models.ImageField(upload_to='images/')
     Price=models.IntegerField()
+    Quantity=models.IntegerField()

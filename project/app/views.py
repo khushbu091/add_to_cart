@@ -10,6 +10,7 @@ def home(request):
     my_dict ={}
     my_dict['form'] = UserForm
     return render(request,'home.html',my_dict)
+#=================================*****==============================
 
 def register(request):
     print(request.POST)
@@ -26,10 +27,12 @@ def register(request):
             msg = 'found some error'
             return render(request,'home.html',{'key':msg})
     return render(request,'home.html')
+#=================================*****==============================
 
 def showdata(request):
     data = User.objects.all()  # Retrieve the instance you want to display
     return render(request, 'show.html', {'data': data,'media_url':MEDIA_URL})
+#=================================*****==============================
 
 def addtocard(request,pk):
     print(pk)
@@ -44,9 +47,11 @@ def addtocard(request,pk):
     print(data)
     return render(request, 'show.html',{'data': data, 'media_url':MEDIA_URL})
 
+#=================================*****==============================
 # def cart(request):
 #     cart = request.session.get('cart',[])
 #     print(cart)
+#=================================*****==============================
 
 def cart_item(request):
     cart = request.session.get('cart')
@@ -56,20 +61,33 @@ def cart_item(request):
     for i in cart:
         data = User.objects.get(id=i)
         cont = {
-            "name":data.Name,
-            "dec":data.Descri,
-            "img":data.Image,
-            "price":data.Price
-        }
-        total_price += data.Price
+                "id":data.id,
+                "name":data.Name,
+                "dec":data.Descri,
+                "img":data.Image,
+                "price":data.Price,
+                "quantity":data.Quantity
+            }
+        total_price += data.Price*data.Quantity
         detail.append(cont)
 
     return render(request,'cart_item.html',{'data':detail,'total_price': total_price,'media_url':MEDIA_URL})
+#===========================================================================
 
-
-    
-    
-    
-
-
-   
+def delete(request,pk):
+    cart=request.session.get('cart')
+    cart.remove(pk)
+    request.session['cart']=cart
+    cart=request.session.get('cart')
+    cartdetails=[]
+    for i in cart:
+        data=User.objects.get(pk=i)
+        cont={
+                "id":data.id,
+                "name":data.Name,
+                "dec":data.Descri,
+                "img":data.Image,
+                "price":data.Price,
+            }
+        cartdetails.append(cont)
+        return render(request,'cart_item.html',{'data':cartdetails,'media_url':MEDIA_URL})

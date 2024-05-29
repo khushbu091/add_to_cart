@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+   
     <h1> hello cart page</h1>
     <div>
         {% for i in data %}
@@ -13,16 +14,18 @@
             <img style="width: 100px; height: 100px;" src="{{media_url}}{{i.img}}" alt=""><br>
         </div>
         <div>
-            {{i.name}}
+            Product Name:{{i.name}}
         </div>
         <div>
-            {{i.dec}}
+            Dec:{{i.dec}}
         </div>
         <div>
-            {{i.price}}
+            Price:{{i.price}}
         </div>
-        <input style="width: 100px;" type="number" name="quantity" placeholder="quantity">
-
+        <div>
+            Quantity:<input type="number" name="quantity" style="width: 50px;" >
+        </div>
+        <button><a href="{% url 'delete' pk=i.id %}">Delete</a></button>
         {%endfor%}
         <p> Total Price:Rs {{total_price}}</p>
     </div>

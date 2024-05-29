@@ -1,11 +1,14 @@
 {{media_url}}
 
 {% for i in data %}
-<img style="width: 100px; height: 100px;" src="{{media_url}}{{i.Image}}" alt=""><br>
-{{i.Name}}<br>
-{{i.Price}}<br>
-{{i.Descri}}<br>
+<img style="width: 100px; height: 100px;" src="{{media_url}}{{i.Image}}" alt="" style="margin-top: 100px;" ><br>
+Product Name:{{i.Name}}<br>
+Product Price:{{i.Price}}<br>
+Product Dec:{{i.Descri}}<br>
+Quantity:<input type="number" name="quantity" style="width: 50px;" ><br>
 <button><a href="{% url 'addtocard' pk=i.id %}"> Add To Cart</a></button>
+
 {% endfor %}
 <br>
-<button><a href="{% url 'cart_item'%}"> Carts</a></button>
+<br>
+<button><a href="{% url 'cart_item' %}"> Carts</a></button>
